@@ -4,7 +4,7 @@ const app = express();
 
 // Define a simple route
 app.get('/', (req, res) => {
-  res.status(200).send('Hello, World! [Broken]');
+  res.status(200).send('Hello, World! [new version]');
 });
 
 // Export the app for testing
