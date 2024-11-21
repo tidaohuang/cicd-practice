@@ -1,0 +1,32 @@
+server {
+    listen 80;
+
+    server_name test.local;
+
+    location / {
+        proxy_pass http://localhost:3000;  # The port where your Express app is running
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+        error_page 502 = /start-app;
+    }
+
+    location = /start-app {
+            internal;
+            default_type text/plain;
+            alias /usr/share/nginx/start-express.sh;
+    }
+
+
+    #location = /start-app {
+        # exec start-express.sh; # not working: required 3rd-party module: nginx-exec
+        #return 200 'script executed';
+    #}
+
+    # Optional: add SSL configuration (if you want HTTPS)
+    # ssl_certificate /path/to/certificate.crt;
+    # ssl_certificate_key /path/to/privatekey.key;
+}
