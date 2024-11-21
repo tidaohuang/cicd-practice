@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node app.js",
+    "start": "node app.js > logs/app.log",
     "deploy": "npm test && echo 'Tests passed! Starting app...' && npm start"
   },
   "keywords": [],
